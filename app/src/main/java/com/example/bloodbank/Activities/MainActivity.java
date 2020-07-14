@@ -3,10 +3,13 @@ package com.example.bloodbank.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,18 +43,34 @@ public class MainActivity extends AppCompatActivity {
     private List<RequestDataModel> requestDataModels;
     private RequestAdapter requestAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView make_request_button=findViewById(R.id.make_request_button);
+
+        ImageButton logoutbutton = (ImageButton) findViewById(R.id.imageButton);
+
         make_request_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,MakeRequestActivity.class));
             }
         });
+
+        logoutbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences Prefs = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = Prefs.edit();
+                editor.clear();
+                editor.commit();
+                Intent intent = new Intent(MainActivity.this, LoginAcivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         requestDataModels=new ArrayList<>();
         Toolbar toolbar=findViewById(R.id.toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -71,11 +90,6 @@ public class MainActivity extends AppCompatActivity {
         requestAdapter=new RequestAdapter(requestDataModels,this);
         recyclerView.setAdapter(requestAdapter);
         populateHomePage();
-        TextView pick_location=findViewById(R.id.pick_location);
-        String location=PreferenceManager.getDefaultSharedPreferences(this).getString("city","No city found");
-        if(location.equals("No city found")){
-            pick_location.setText(location);
-        }
 
     }
 

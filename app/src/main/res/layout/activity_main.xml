@@ -9,27 +9,16 @@
 
    <LinearLayout
        android:id="@+id/linearLayout"
-      android:layout_below="@id/toolbar"
-      android:background="#FAFAFA"
-      android:gravity="center"
-      android:layout_centerHorizontal="true"
+       android:layout_below="@id/toolbar"
+       android:orientation="vertical"
+       android:background="#FAFAFA"
+       android:gravity="center"
+       android:layout_centerHorizontal="true"
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
 
-   <TextView
-      android:id="@+id/pick_location"
-      android:padding="5dp"
-      android:layout_margin="8dp"
-      android:textSize="20dp"
-      android:layout_centerHorizontal="true"
-      android:layout_below="@+id/toolbar"
-       android:layout_gravity="center"
-      android:background="#FAFAFA"
-      android:drawableEnd="@drawable/ic_location_on_black_24dp"
-      android:text="Choose Location "
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"/>
    </LinearLayout>
+
 
    <androidx.appcompat.widget.Toolbar
        android:id="@+id/toolbar"
@@ -53,10 +42,19 @@
       android:textStyle="bold"
       android:textColor="@android:color/white"
       android:padding="16dp"
-       android:background="@color/colorPrimary"
+       android:background="@android:color/holo_green_light"
       android:layout_alignParentBottom="true"
       android:textAlignment="center"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"/>
+
+   <ImageButton
+       android:id="@+id/imageButton"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="300dp"
+       android:layout_marginTop="10dp"
+       android:layout_marginBottom="5dp"
+       app:srcCompat="@android:drawable/ic_lock_power_off" />
 
 </RelativeLayout>

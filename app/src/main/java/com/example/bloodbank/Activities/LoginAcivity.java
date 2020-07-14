@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,7 +56,6 @@ public class LoginAcivity extends AppCompatActivity {
                 if(isValid(number,password)){
                     login(number,password);
                 }
-
             }
         });
     }
@@ -64,6 +64,12 @@ public class LoginAcivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if(!(response.equals("Invalid Credentials"))){
+
+                    SharedPreferences prefs=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=prefs.edit();
+                    editor.putString("login", response);
+                    editor.commit();
+
                     Toast.makeText(LoginAcivity.this,response,Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginAcivity.this,MainActivity.class));
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("number",number).apply();

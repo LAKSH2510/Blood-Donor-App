@@ -30,8 +30,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/border_background"
                     android:scaleType="fitXY"
-                    android:src="@drawable/request_logo" />
-
+                    android:src="@drawable/we" />
 
 
             </androidx.cardview.widget.CardView>
